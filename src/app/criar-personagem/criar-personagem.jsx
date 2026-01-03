@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './criar-personagem.css'
 import { racas } from '../../data/racas/racas.js'
-
+import { classes } from '../../data/classes/classes.js'
 import Anao from '../racas/anao.jsx'
 import Elfo from '../racas/elfo.jsx'
 import Halfling from '../racas/halfling.jsx'
@@ -11,6 +11,19 @@ import Gnomo from '../racas/gnomo.jsx'
 import MeioElfo from '../racas/meio-elfo.jsx'
 import MeioOrc from '../racas/meio-orc.jsx'
 import Tiefling from '../racas/tiefling.jsx'
+import Barbaro from '../classes/barbaro.jsx'
+import Bardo from '../classes/bardo.jsx'
+import Bruxo from '../classes/bruxo.jsx'
+import Clerigo from '../classes/clerigo.jsx'
+import Druida from '../classes/druida.jsx'
+import Feiticeiro from '../classes/feiticeiro.jsx'
+import Guerreiro from '../classes/guerreiro.jsx'
+import Ladino from '../classes/ladino.jsx'
+import Mago from '../classes/mago.jsx'
+import Monge from '../classes/monge.jsx'
+import Paladino from '../classes/paladino.jsx'
+import Patrulheiro from '../classes/patrulheiro.jsx'
+
 
 const paginasRacas = {
   anao: <Anao />,
@@ -19,9 +32,23 @@ const paginasRacas = {
   humano: <Humano />,
   draconato: <Draconato />,
   gnomo: <Gnomo />,
-  'meio-elfo': <MeioElfo />,
-  'meio-orc': <MeioOrc />,
+  meioelfo: <MeioElfo />,
+  meioorc: <MeioOrc />,
   tiefling: <Tiefling />
+}
+const paginasClasses = {
+  barbaro: <Barbaro />,
+  bardo: <Bardo />,
+  bruxo: <Bruxo />,
+  clerigo: <Clerigo />,
+  druida: <Druida />,
+  feiticeiro: <Feiticeiro />,
+  guerreiro: <Guerreiro />,
+  ladino: <Ladino />,
+  mago: <Mago />,
+  monge: <Monge />,
+  paladino: <Paladino />,
+  patrulheiro: <Patrulheiro />
 }
 
 export default function criarPersonagem() {
@@ -36,6 +63,10 @@ export default function criarPersonagem() {
   const [antecedente, setAntecedente] = useState('')
   const [popup, setPopup] = useState(null)
   const [racaEmExibicao, setRacaEmExibicao] = useState(null)
+  const [tooltip, setTooltip] = useState('')
+const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 })
+const [classeEmExibicao, setClasseEmExibicao] = useState(null)
+
 
   useEffect(() => {
     if (!popup) return
@@ -64,26 +95,52 @@ export default function criarPersonagem() {
             <div className="alinhamento-coluna">
               <label>Ordem</label>
               <div className="alinhamento-opcoes">
-                {['Leal', 'Neutro', 'Caótico'].map(o => (
-                  <div key={o}
-                       className={`alinhamento-item ${ordem === o ? 'ativo' : ''}`}
-                       onClick={() => setOrdem(o)}>
-                    {o}
-                  </div>
-                ))}
+               {['Leal', 'Neutro', 'Caótico'].map(o => (
+  <div
+    key={o}
+    className={`alinhamento-item ${ordem === o ? 'ativo' : ''}`}
+    onClick={() => setOrdem(o)}
+    onMouseMove={e => {
+      setTooltipPos({ x: e.clientX, y: e.clientY })
+      const textos = {
+        Leal: 'Segue leis, tradição, honra e hierarquia.',
+        Neutro: 'Busca equilíbrio, pragmatismo e estabilidade.',
+        Caótico: 'Valoriza liberdade, mudança e autonomia.'
+      }
+      setTooltip(textos[o])
+    }}
+    onMouseLeave={() => setTooltip('')}
+  >
+    {o}
+  </div>
+))}
+
               </div>
             </div>
 
             <div className="alinhamento-coluna">
               <label>Moral</label>
               <div className="alinhamento-opcoes">
-                {['Bom', 'Neutro', 'Mau'].map(m => (
-                  <div key={m}
-                       className={`alinhamento-item ${moral === m ? 'ativo' : ''}`}
-                       onClick={() => setMoral(m)}>
-                    {m}
-                  </div>
-                ))}
+               {['Bom', 'Neutro', 'Mau'].map(m => (
+  <div
+    key={m}
+    className={`alinhamento-item ${moral === m ? 'ativo' : ''}`}
+    onClick={() => setMoral(m)}
+    onMouseMove={e => {
+      setTooltipPos({ x: e.clientX, y: e.clientY })
+      const textos = {
+        Bom: 'Age por compaixão, altruísmo e proteção dos outros.',
+        Neutro: 'Age conforme a situação e o bom senso.',
+        Mau: 'Busca poder, egoísmo e destruição sem remorso.'
+      }
+      setTooltip(textos[m])
+    }}
+    onMouseLeave={() => setTooltip('')}
+  >
+    {m}
+  </div>
+))}
+
               </div>
             </div>
           </div>
@@ -101,7 +158,11 @@ export default function criarPersonagem() {
         </div>
 
         <div className="criar-bloco">
-          <h2 className="titulo-clicavel">Classe</h2>
+          <h2 className="titulo-clicavel" onClick={() => setPopup('classes')}>
+  Classe
+</h2>
+
+
           <select value={classe} onChange={e => setClasse(e.target.value)}>
             <option value="">Selecione uma classe</option>
             <option>Guerreiro</option>
@@ -162,7 +223,14 @@ export default function criarPersonagem() {
             {racaEmExibicao && (
               <>
                 <h2>{racaEmExibicao.nome}</h2>
-                {paginasRacas[racaEmExibicao.id]}
+                {paginasRacas[
+  racaEmExibicao.id
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z]/g, '')
+]}
+
                 <button className="botao-popup-voltar" onClick={() => setRacaEmExibicao(null)}>← Voltar</button>
               </>
             )}
@@ -170,6 +238,53 @@ export default function criarPersonagem() {
           </div>
         </div>
       )}
+      {tooltip && (
+  <div
+    className="tooltip-alinhamento"
+    style={{ top: tooltipPos.y + 16, left: tooltipPos.x + 16 }}
+  >
+    {tooltip}
+  </div>
+)}
+{popup === 'classes' && (
+  <div className="popup-overlay" onClick={() => { setPopup(null); setClasseEmExibicao(null) }}>
+    <div className="popup-conteudo" onClick={e => e.stopPropagation()}>
+
+      <button className="popup-fechar" onClick={() => { setPopup(null); setClasseEmExibicao(null) }}>×</button>
+
+      {!classeEmExibicao && (
+        <>
+          <h2>Classes</h2>
+
+          <div className="lista-racas">
+            {classes.map(c => (
+              <div
+                key={c.id}
+                className="item-raca"
+                onClick={() => setClasseEmExibicao(c)}
+              >
+                {c.nome}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {classeEmExibicao && (
+        <>
+          <h2>{classeEmExibicao.nome}</h2>
+          {paginasClasses[classeEmExibicao.id]}
+          <button className="botao-popup-voltar" onClick={() => setClasseEmExibicao(null)}>
+            ← Voltar
+          </button>
+        </>
+      )}
+
+    </div>
+  </div>
+)}
+
+
     </div>
   )
 }

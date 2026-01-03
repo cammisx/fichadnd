@@ -10,3 +10,26 @@ body {
   color: #f3e9d2;
   font-family: 'MedievalSharp', cursive;
 }
+.separador-grimorio {
+  position: relative;
+  margin: 26px 0 22px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #cfa44a,
+    transparent
+  );
+}
+
+.separador-grimorio::after {
+  content: "✦";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #f2e2c4;
+  padding: 0 10px;
+  color: #8b4a1f;
+  font-size: 14px;
+}

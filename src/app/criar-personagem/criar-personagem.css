@@ -291,3 +291,220 @@
     inset 0 0 4px rgba(255,255,255,0.4);
   transform: translateY(-1px);
 }
+.tooltip-alinhamento {
+  position: fixed;
+  background: #1a0f05;
+  color: #f3e9d2;
+  border: 2px solid #cfa44a;
+  padding: 10px 14px;
+  border-radius: 8px;
+  max-width: 260px;
+  font-size: 14px;
+  z-index: 9999;
+  pointer-events: none;
+  box-shadow: 0 0 14px rgba(207,164,74,0.7);
+  animation: tooltipFade 0.15s ease;
+}
+
+@keyframes tooltipFade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
+
+.grimorio-raca {
+  text-align: center;
+}
+
+.titulo-raca-grimorio {
+  font-family: 'Eagle Lake', cursive;
+  font-size: 42px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  color: #5a2b0c;
+  text-shadow: 0 0 10px rgba(207,164,74,0.8);
+}
+
+.abas-raca {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.aba-item {
+  padding: 8px 18px;
+  border-radius: 6px;
+  background: #f1ddb5;
+  border: 2px solid #b88b3a;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: inset 0 0 6px rgba(255,255,255,0.4);
+}
+
+.aba-item:hover {
+  background: #f8e7c8;
+  color: #7a2d1c;
+  box-shadow:
+    0 0 6px rgba(207,164,74,0.6),
+    0 0 14px rgba(228,178,102,0.9);
+}
+
+.aba-item.ativa {
+  background: #7a2d1c;
+  color: #f3e9d2;
+  border-color: #e4b266;
+}
+
+.subtitulo-grimorio {
+  color: #7a2d1c;
+  border-bottom: 2px solid #cfa44a;
+  margin-bottom: 10px;
+}
+
+.conteudo-aba {
+  transition: opacity 0.3s ease;
+}
+
+.fade-in { opacity: 1; }
+.fade-out { opacity: 0; }
+.popup-conteudo > h2 {
+  font-family: 'Eagle Lake', cursive;
+  font-size: 42px;
+  letter-spacing: 2px;
+  color: #5a2b0c;
+  text-shadow: 0 0 10px rgba(207,164,74,0.8);
+}
+@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
+
+.popup-conteudo h2 {
+  font-family: 'Eagle Lake', cursive !important;
+  font-size: 44px;
+  letter-spacing: 2px;
+  color: #5a2b0c;
+  text-shadow: 0 0 12px rgba(207,164,74,0.9);
+}
+.quote-raca {
+  font-style: italic;
+  background: rgba(0,0,0,0.08);
+  border-left: 4px solid #cfa44a;
+  padding: 12px 16px;
+  margin-bottom: 18px;
+}
+
+.bloco-texto {
+  margin-bottom: 22px;
+}
+
+.subtitulo-grimorio {
+  color: #7a2d1c;
+  margin-bottom: 6px;
+}
+.paragrafo-grimorio {
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+.subtitulo-grimorio {
+  margin-top: 22px;
+  margin-bottom: 8px;
+  color: #7a2d1c;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+.criacao-livro {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.bloco-livro {
+  margin-bottom: 22px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0,0,0,.25);
+}
+
+.bloco-livro h4 {
+  color: #7a2d1c;
+  font-size: 18px;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.bloco-livro ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.bloco-livro li {
+  padding: 3px 0;
+  font-size: 15px;
+}
+
+.titulo-grande {
+  text-align: center;
+  margin-bottom: 26px;
+  font-size: 28px;
+  color: #7a2d1c;
+  text-shadow: 0 0 6px rgba(122,45,28,.5);
+}
+/* Alinhamento geral */
+.criacao-livro {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* Títulos continuam centralizados */
+.bloco-livro {
+  margin-bottom: 18px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+
+/* Lista de traços */
+.lista-tracos li {
+  margin-bottom: 4px;
+}
+
+/* Habilidades */
+.habilidade {
+  margin-top: 6px;
+}
+
+/* Sub-raças */
+.subraca {
+  margin-top: 10px;
+}
+
+.nome-subraca {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+.separador-grimorio {
+  height: 1px;
+  margin: 22px 0;
+  position: relative;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #cfa44a,
+    #7a2d1c,
+    #cfa44a,
+    transparent
+  );
+}
+
+.separador-grimorio::before {
+  content: "✦";
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  transform: translateX(-50%);
+  background: #e4cfa4;
+  padding: 0 10px;
+  color: #7a2d1c;
+  font-size: 16px;
+}
