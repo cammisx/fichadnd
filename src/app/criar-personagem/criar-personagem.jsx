@@ -1,8 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './criar-personagem.css'
 import { racas } from '../../data/racas/racas.js'
 
-// páginas de conteúdo das raças
 import Anao from '../racas/anao.jsx'
 import Elfo from '../racas/elfo.jsx'
 import Halfling from '../racas/halfling.jsx'
@@ -28,12 +27,26 @@ const paginasRacas = {
 export default function criarPersonagem() {
   const [nome, setNome] = useState('')
   const [idade, setIdade] = useState('')
-  const [alinhamento, setAlinhamento] = useState('neutro')
+
+  const [ordem, setOrdem] = useState('Neutro')
+  const [moral, setMoral] = useState('Neutro')
+  const alinhamento = `${ordem} ${moral}`
+
   const [raca, setRaca] = useState('')
   const [classe, setClasse] = useState('')
   const [antecedente, setAntecedente] = useState('')
   const [popup, setPopup] = useState(null)
   const [racaEmExibicao, setRacaEmExibicao] = useState(null)
+
+  const [tooltip, setTooltip] = useState(null)
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 })
+
+  useEffect(() => {
+    if (!popup) return
+    const fechar = e => e.key === 'Escape' && setPopup(null)
+    window.addEventListener('keydown', fechar)
+    return () => window.removeEventListener('keydown', fechar)
+  }, [popup])
 
   return (
     <div className="criar">
@@ -48,125 +61,105 @@ export default function criarPersonagem() {
 
           <label>Idade</label>
           <input type="number" value={idade} onChange={e => setIdade(e.target.value)} />
+<h2>Alinhamento</h2>
 
-          <h2 className="titulo-clicavel" onClick={() => setPopup('alinhamento')}>
-            Alinhamento
-          </h2>
+<div className="alinhamento-bloco">
 
-          <select value={alinhamento} onChange={e => setAlinhamento(e.target.value)}>
-            <option value="leal bom">Leal Bom</option>
-            <option value="neutro bom">Neutro Bom</option>
-            <option value="caotico bom">Caótico Bom</option>
-            <option value="leal neutro">Leal Neutro</option>
-            <option value="neutro">Neutro</option>
-            <option value="caotico neutro">Caótico Neutro</option>
-            <option value="leal mau">Leal Mau</option>
-            <option value="neutro mau">Neutro Mau</option>
-            <option value="caotico mau">Caótico Mau</option>
-          </select>
+  <div className="alinhamento-coluna">
+    <label>Ordem</label>
+    <div className="alinhamento-opcoes">
+      {['Leal', 'Neutro', 'Caótico'].map(opcao => (
+        <div
+          key={opcao}
+          className={`alinhamento-item ${ordem === opcao ? 'ativo' : ''}`}
+          onClick={() => setOrdem(opcao)}
+          onMouseEnter={e => {
+            setTooltipPos({ x: e.clientX, y: e.clientY })
+            const t = {
+              Leal: 'Segue leis, tradição, honra e hierarquia.',
+              Neutro: 'Busca equilíbrio, estabilidade e pragmatismo.',
+              Caótico: 'Valoriza liberdade, mudança e autonomia.'
+            }
+            setTooltip(t[opcao])
+          }}
+          onMouseLeave={() => setTooltip(null)}
+        >
+          {opcao}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div className="alinhamento-coluna">
+    <label>Moral</label>
+    <div className="alinhamento-opcoes">
+      {['Bom', 'Neutro', 'Mau'].map(opcao => (
+        <div
+          key={opcao}
+          className={`alinhamento-item ${moral === opcao ? 'ativo' : ''}`}
+          onClick={() => setMoral(opcao)}
+          onMouseEnter={e => {
+            setTooltipPos({ x: e.clientX, y: e.clientY })
+            const t = {
+              Bom: 'Age por compaixão, altruísmo e proteção dos outros.',
+              Neutro: 'Age conforme a situação e o bom senso.',
+              Mau: 'Busca poder, egoísmo ou destruição sem remorso.'
+            }
+            setTooltip(t[opcao])
+          }}
+          onMouseLeave={() => setTooltip(null)}
+        >
+          {opcao}
+        </div>
+      ))}
+    </div>
+  </div>
+
+</div>
+
+
+
         </div>
 
         <div className="criar-bloco">
-          <h2 className="titulo-clicavel" onClick={() => setPopup('racas')}>
-            Raça
-          </h2>
-
+          <h2 className="titulo-clicavel" onClick={() => setPopup('racas')}>Raça</h2>
           <select value={raca} onChange={e => setRaca(e.target.value)}>
             <option value="">Selecione uma raça</option>
-            {racas.map(r => (
-              <option key={r.id}>{r.nome}</option>
-            ))}
+            {racas.map(r => <option key={r.id}>{r.nome}</option>)}
           </select>
         </div>
 
         <div className="criar-bloco">
-          <h2 className="titulo-clicavel" onClick={() => setPopup('classes')}>
-            Classe
-          </h2>
-
+          <h2 className="titulo-clicavel">Classe</h2>
           <select value={classe} onChange={e => setClasse(e.target.value)}>
             <option value="">Selecione uma classe</option>
-            <option>Guerreiro</option>
-            <option>Mago</option>
-            <option>Ladino</option>
-            <option>Clérigo</option>
-            <option>Paladino</option>
-            <option>Bárbaro</option>
-            <option>Feiticeiro</option>
-            <option>Bruxo</option>
-            <option>Monge</option>
-            <option>Druida</option>
-            <option>Patrulheiro</option>
-            <option>Bardo</option>
+            <option>Guerreiro</option><option>Mago</option><option>Ladino</option>
+            <option>Clérigo</option><option>Paladino</option><option>Bárbaro</option>
+            <option>Feiticeiro</option><option>Bruxo</option><option>Monge</option>
+            <option>Druida</option><option>Patrulheiro</option><option>Bardo</option>
           </select>
         </div>
 
         <div className="criar-bloco">
-          <h2 className="titulo-clicavel" onClick={() => setPopup('antecedentes')}>
-            Antecedente
-          </h2>
-
+          <h2 className="titulo-clicavel">Antecedente</h2>
           <select value={antecedente} onChange={e => setAntecedente(e.target.value)}>
             <option value="">Selecione um antecedente</option>
-            <option>Acólito</option>
-            <option>Artesão da Guilda</option>
-            <option>Charlatão</option>
-            <option>Criminoso</option>
-            <option>Herói do Povo</option>
-            <option>Nobre</option>
-            <option>Sábio</option>
-            <option>Soldado</option>
-            <option>Eremita</option>
-            <option>Forasteiro</option>
-            <option>Marinheiro</option>
+            <option>Acólito</option><option>Artesão da Guilda</option>
+            <option>Charlatão</option><option>Criminoso</option>
+            <option>Herói do Povo</option><option>Nobre</option>
+            <option>Sábio</option><option>Soldado</option>
+            <option>Eremita</option><option>Forasteiro</option><option>Marinheiro</option>
           </select>
         </div>
-
-        {popup === 'racas' && (
-          <div className="popup-overlay">
-            <div className="popup-conteudo">
-
-              {!racaEmExibicao && (
-                <>
-                  <h2>Raças</h2>
-
-                  <div className="lista-racas">
-                    {racas.map(r => (
-                      <div
-                        key={r.id}
-                        className="item-raca"
-                        onClick={() => setRacaEmExibicao(r)}
-                      >
-                        {r.nome}
-                      </div>
-                    ))}
-                  </div>
-
-                  <button onClick={() => setPopup(null)}>Fechar</button>
-                </>
-              )}
-
-              {racaEmExibicao && (
-                <>
-                  <h2>{racaEmExibicao.nome}</h2>
-
-                  {paginasRacas[racaEmExibicao.id]}
-
-                  <button
-                    className="botao-popup-voltar"
-                    onClick={() => setRacaEmExibicao(null)}
-                  >
-                    ← Voltar
-                  </button>
-                </>
-              )}
-
-            </div>
-          </div>
-        )}
 
         <button className="criar-botao">Próximo</button>
       </div>
+
+      {tooltip && (
+        <div className="tooltip-alinhamento" style={{ top: tooltipPos.y + 14, left: tooltipPos.x + 14 }}>
+          {tooltip}
+        </div>
+      )}
     </div>
   )
 }
