@@ -1,0 +1,146 @@
+import { useState } from "react"
+
+export default function RacaLayout({ raca }) {
+
+  const [aba, setAba] = useState("visao")
+  const [fade, setFade] = useState(true)
+
+  const criacao = raca.criacao
+
+  function trocarAba(nova) {
+    if (nova === aba) return
+    setFade(false)
+    setTimeout(() => {
+      setAba(nova)
+      setFade(true)
+    }, 160)
+  }
+
+  return (
+    <div className="grimorio-raca">
+
+      <div className="abas-raca">
+        <div className={`aba-item ${aba === "visao" ? "ativa" : ""}`} onClick={() => trocarAba("visao")}>Visão Geral</div>
+        <div className={`aba-item ${aba === "cultura" ? "ativa" : ""}`} onClick={() => trocarAba("cultura")}>Cultura & Sociedade</div>
+       <div
+  className={`aba-item ${aba === "criacao" ? "ativa" : ""}`}
+  onClick={() => trocarAba("criacao")}
+>
+  {raca.tituloCriacao}
+</div>
+
+
+      </div>
+
+      <div className={`conteudo-aba ${fade ? "fade-in" : "fade-out"}`}>
+
+        {/* VISÃO */}
+        {aba === "visao" && (
+          <div className="secao-raca">
+            <blockquote className="quote-raca">
+  {raca.visaoGeral.quote.split("\n").map((linha, i, arr) => {
+    const ultima = i === arr.length - 1
+    return (
+      <div key={i} className={ultima ? "linha-autor-quote" : ""}>
+        {linha}
+      </div>
+    )
+  })}
+</blockquote>
+
+
+
+            {raca.visaoGeral.descricao.map((bloco, i) => (
+              <div key={i} className="bloco-texto">
+                {bloco.titulo && (
+                  <>
+                    <div className="separador-grimorio">
+                      <img src="https://i.imgur.com/XKUwqV2.png" alt="" className="separador-img" />
+                    </div>
+                    <h4 className="subtitulo-grimorio">{bloco.titulo}</h4>
+                  </>
+                )}
+                <div
+  
+  className="paragrafo-grimorio"
+  dangerouslySetInnerHTML={{
+    __html: bloco.texto
+      // quebra normal
+      .replace(/\n/g, "<br><br>")
+      // quebra antes de cada novo bloco em negrito
+      .replace(/\s*\*\*/g, "<br><br>**")
+      // negrito markdown → HTML
+      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+  }}
+/>
+
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* CULTURA */}
+        {aba === "cultura" && (
+          <div className="secao-raca">
+            {raca.culturaSociedade.map((bloco, i) => (
+              <div key={i} className="bloco-texto">
+                {i > 0 && (
+                  <div className="separador-grimorio">
+                    <img src="https://i.imgur.com/XKUwqV2.png" alt="" className="separador-img" />
+                  </div>
+                )}
+                <h4 className="subtitulo-grimorio">{bloco.titulo}</h4>
+                <p>{bloco.texto}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* CRIAÇÃO */}
+        {aba === "criacao" && (
+          <div className="secao-raca criacao-livro">
+
+            <div className="bloco-livro">
+              <h4>Traços Raciais</h4>
+              <ul className="lista-tracos">
+                <li><strong>Modificadores:</strong> {criacao.tracos.atributos}</li>
+                <li><strong>Deslocamento:</strong> {criacao.tracos.deslocamento}</li>
+                <li><strong>Tamanho:</strong> {criacao.tracos.tamanho}</li>
+                <li><strong>Idiomas:</strong> {criacao.tracos.idiomas}</li>
+              </ul>
+            </div>
+
+            <div className="bloco-livro">
+              <div className="separador-grimorio">
+                <img src="https://i.imgur.com/XKUwqV2.png" alt="" className="separador-img" />
+              </div>
+              <h4>Habilidades de Raça</h4>
+              {criacao.habilidades.map((h, i) => (
+                <div key={i} className="habilidade">
+                  <strong>{h.nome}</strong> — {h.descricao}
+                </div>
+              ))}
+            </div>
+
+            <div className="bloco-livro">
+              <div className="separador-grimorio">
+                <img src="https://i.imgur.com/XKUwqV2.png" alt="" className="separador-img" />
+              </div>
+              <h4>Sub-Raças</h4>
+              {criacao.subracas.map((s, i) => (
+                <div key={i} className="subraca">
+                  <div className="nome-subraca">{s.nome}</div>
+                  <div><strong>Descrição:</strong> {s.descricao}</div>
+                  <div><strong>Modificadores:</strong> {s.modificadores}</div>
+                  <div><strong>Habilidades:</strong> {s.habilidades}</div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        )}
+
+      </div>
+    </div>
+  )
+}

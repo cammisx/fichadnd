@@ -358,9 +358,9 @@
 
 .subtitulo-grimorio {
   color: #7a2d1c;
-  border-bottom: 2px solid #cfa44a;
   margin-bottom: 10px;
 }
+
 
 .conteudo-aba {
   transition: opacity 0.3s ease;
@@ -420,7 +420,7 @@
 .bloco-livro {
   margin-bottom: 22px;
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(0,0,0,.25);
+  border-bottom: none;
 }
 
 .bloco-livro h4 {
@@ -479,32 +479,154 @@
 }
 
 .nome-subraca {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 16px;
   margin-bottom: 4px;
+  color: #cfa44a; /* dourado medieval */
+  text-shadow: 0 0 6px rgba(207,164,74,0.5);
 }
 .separador-grimorio {
-  height: 1px;
-  margin: 22px 0;
-  position: relative;
-  background: linear-gradient(
-    to right,
-    transparent,
-    #cfa44a,
-    #7a2d1c,
-    #cfa44a,
-    transparent
-  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 28px 0 20px;
 }
 
-.separador-grimorio::before {
-  content: "✦";
+.separador-grimorio {
+  display: flex;
+  justify-content: center;
+  margin: 26px 0 18px;
+}
+
+
+.separador-grimorio span {
+  position: relative;
+  width: 55%;
+  height: 26px;
+  margin: 0 14px;
+}
+
+.separador-grimorio span::before {
+  content: "❖";
   position: absolute;
   left: 50%;
-  top: -10px;
-  transform: translateX(-50%);
-  background: #e4cfa4;
-  padding: 0 10px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
   color: #7a2d1c;
-  font-size: 16px;
+  text-shadow: 0 0 6px rgba(207,164,74,.7);
 }
+
+.separador-grimorio span::after {
+  content: "✦   ✦";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  letter-spacing: 18px;
+  color: #cfa44a;
+  opacity: .9;
+}
+
+
+.bloco-texto::before,
+.bloco-texto::after,
+.secao-raca::before,
+.secao-raca::after {
+  display: none !important;
+  content: none !important;
+  border: none !important;
+}
+.bloco-texto {
+  border: none !important;
+}
+.separador-grimorio {
+  display: flex;
+  justify-content: center;
+  margin: 26px 0 18px;
+  pointer-events: none;
+}
+
+.separador-img {
+  width: 50%;
+  max-width: 520px;
+  height: auto;
+  filter:
+    brightness(1.05)
+    contrast(1.05)
+    saturate(1.6)
+    sepia(0.8)
+    hue-rotate(-8deg);
+}
+
+.separador-img { filter: brightness(0.9) sepia(0.2); }
+.separador-img {
+  width: 50%;
+  max-width: 520px;
+  height: auto;
+
+  filter:
+    brightness(1.05)
+    contrast(1.05)
+    saturate(1.4)
+    sepia(0.4)
+    hue-rotate(-8deg)
+    drop-shadow(0 0 6px rgba(255, 215, 120, 0.5))
+    drop-shadow(0 0 14px rgba(255, 200, 90, 0.35));
+
+  animation: brilhoGrimorio 3.5s ease-in-out infinite;
+}
+@keyframes brilhoGrimorio {
+  0% {
+    filter:
+      brightness(1.03)
+      contrast(1.03)
+      saturate(1.3)
+      sepia(0.35)
+      hue-rotate(-8deg)
+      drop-shadow(0 0 4px rgba(255, 215, 120, 0.4))
+      drop-shadow(0 0 10px rgba(255, 200, 90, 0.25));
+  }
+
+  50% {
+    filter:
+      brightness(1.12)
+      contrast(1.1)
+      saturate(1.6)
+      sepia(0.5)
+      hue-rotate(-6deg)
+      drop-shadow(0 0 8px rgba(255, 220, 140, 0.65))
+      drop-shadow(0 0 18px rgba(255, 200, 100, 0.45));
+  }
+
+  100% {
+    filter:
+      brightness(1.03)
+      contrast(1.08)
+      saturate(1.3)
+      sepia(0.35)
+      hue-rotate(-8deg)
+      drop-shadow(0 0 4px rgba(255, 215, 120, 0.4))
+      drop-shadow(0 0 10px rgba(255, 200, 90, 0.25));
+  }
+}
+.autor-quote {
+  display: block;
+  text-align: right;
+  margin-top: 8px;
+  font-style: normal;
+  font-size: 14px;
+  color: #6b4a1f;
+}
+.linha-autor-quote {
+  margin-top: 8px;
+  text-align: right;
+  font-style: normal;
+  font-size: 14px;
+  color: #6b4a1f;
+}
+.paragrafo-grimorio {
+  line-height: 1;
+}
+
