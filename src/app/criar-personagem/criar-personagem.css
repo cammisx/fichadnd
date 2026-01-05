@@ -100,46 +100,28 @@
 }
 
 
-.popup-conteudo {
-  background: linear-gradient(#f2e2c4, #e4cfa4);
-  border: 3px solid #5a3b1f;
-  border-radius: 14px;
-
-  width: 880px;
-  max-width: 100%;
-  max-height: 100%;
-
-  padding: 48px 56px;
-
-  overflow-y: auto;
-  box-shadow: 0 0 40px rgba(0,0,0,0.6);
-
-  display: flex;
-  flex-direction: column;
-}
-
-
 .popup-conteudo h2 {
   text-align: center;
   font-size: 32px;
-  margin-bottom: 24px;
+  margin-bottom: 150px;
 }
 
 /* ---------- LISTA DE RAÇAS ---------- */
 
 .lista-racas {
+
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   margin: 18px 0;
 }
 
 .item-raca {
-  padding: 10px 14px;
+  padding: 10px 25px;
   border-radius: 6px;
   border: 2px solid transparent;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 20px;
   color: #3b2a1a;
   transition: all 0.2s ease;
 }
@@ -157,7 +139,7 @@
   margin: 24px auto 30px;
   padding: 10px 26px;
   background: #7a2d1c;
-  border: 2px solid #e4b266;
+  border: 0px solid #e4b266;
   color: #f3e9d2;
   font-family: inherit;
   cursor: pointer;
@@ -173,12 +155,13 @@
 /* ---------- BOTÃO FECHAR ---------- */
 
 .popup-fechar {
+  
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 2px;
+  right: 2px;
 
-  width: 34px;
-  height: 34px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
 
   background: radial-gradient(circle at 30% 30%, #ff5c5c, #9e0000);
@@ -203,21 +186,6 @@
 }
 
 
-/* ---------- SCROLLBAR ---------- */
-
-.popup-conteudo::-webkit-scrollbar {
-  width: 8px;
-}
-
-.popup-conteudo::-webkit-scrollbar-track {
-  background: rgba(0,0,0,0.1);
-  border-radius: 10px;
-}
-
-.popup-conteudo::-webkit-scrollbar-thumb {
-  background: #7a4a1f;
-  border-radius: 10px;
-}
 
 /* ---------- ANIMAÇÕES ---------- */
 
@@ -350,7 +318,7 @@
 
 .popup-conteudo h2 {
   font-family: 'Eagle Lake', cursive !important;
-  font-size: 44px;
+  font-size: 50px;
   letter-spacing: 2px;
   color: #5a2b0c;
   text-shadow: 0 0 12px rgba(207,164,74,0.9);
@@ -609,4 +577,170 @@
   letter-spacing: 2px;
   color: #5a2b0c;
 
+}
+
+.ornamento-canto {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: url("https://i.imgur.com/QCz8PQ1.png") no-repeat center;
+  background-size: contain;
+  opacity: 1;
+  pointer-events: none;
+  
+}
+
+.canto-esq-topo { top: 12px; left: 12px; transform: rotate(0deg); }
+.canto-dir-topo { top: 12px; right: 12px; transform: rotate(90deg); }
+.canto-dir-baixo { bottom: 12px; right: 12px; transform: rotate(180deg); }
+.canto-esq-baixo { bottom: 12px; left: 12px; transform: rotate(270deg); }
+
+
+.popup-scroll h2 {
+  margin-bottom: 5px;
+}
+
+.lista-racas .item-raca {
+  font-size: clamp(10px, 1.6vw, 18px);
+}
+
+.popup-scroll h2 {
+  letter-spacing: clamp(1px, 0.3vw, 3px);
+}
+
+
+.ornamento-canto {
+  filter:
+    sepia(2)
+    hue-rotate(-15deg)
+    saturate(3)
+    brightness(1);
+
+}
+.popup-scroll h2 {
+  font-size: clamp(18px, 4vw, 40px);
+}
+
+
+
+.popup-rodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 32px 24px;
+  border-top: 1px solid rgba(120, 70, 30, 0.25);
+}
+
+.popup-acao {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 18px;
+  color: #5a3414;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.popup-acao:hover {
+  color: #8a4b1f;
+  text-shadow: 0 0 6px rgba(180, 110, 40, 0.6);
+}
+.popup-acao {
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+.popup-acao {
+  border: none !important;
+  background: transparent;
+  box-shadow: none !important;
+  outline: none;
+}
+.popup-rodape {
+  border: none !important;
+  box-shadow: none !important;
+}
+.popup-rodape::before,
+.popup-rodape::after {
+  content: none !important;
+  display: none !important;
+}
+.popup-acao {
+ font-size: clamp(0.9rem, 2vw, 1.5rem);
+}
+.popup-acao {
+  padding: 6px 12px;
+}
+
+
+
+
+/* Chrome, Edge, Safari */
+.popup-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.popup-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  position: relative;
+}
+
+.popup-scroll::-webkit-scrollbar-track::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(139, 90, 43, 0.15),
+    rgba(139, 90, 43, 0.6),
+    rgba(139, 90, 43, 0.15)
+  );
+}
+
+
+.popup-scroll::-webkit-scrollbar-thumb {
+  background: radial-gradient(circle at 30% 30%, #ffe1a3, #d19946 60%, #8b5a2b 100%);
+  border-radius: 999px;
+  border: 1px solid rgba(60, 35, 15, 0.7);
+
+  height: 15px;           /* 👈 tamanho visual da “bolinha” */
+  max-height: 20px;       /* 👈 força o limite */
+}
+
+/* ==============================
+   ESTRUTURA FINAL DO POPUP
+   ============================== */
+
+.popup-conteudo {
+  position: relative;
+  width: min(90vw, 1100px);
+  height: min(85vh, 750px);
+  aspect-ratio: 4 / 3;
+
+  background: #f3e2be;
+  border-radius: 50px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-miolo {
+  width: 100%;
+  height: 100%;
+  padding: 65px 110px 10px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;   /* trava a moldura */
+}
+
+.popup-scroll {
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 5px;
+}
+.conteudo-aba {
+  transition: opacity 0.45s ease;
 }

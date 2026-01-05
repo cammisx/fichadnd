@@ -3,6 +3,7 @@ import './criar-personagem.css'
 import { racas } from '../../data/racas-data/racas.js'
 import { classes } from '../../data/classes-data/classes.js'
 import ClassLayout from '../../components/classlayout.jsx'
+import AntecedenteLayout from "../../components/antecedentelayout.jsx"
 
 
 import Anao from '../racas/anao.jsx'
@@ -92,6 +93,7 @@ export default function CriarPersonagem() {
   const [popup, setPopup] = useState(null)
   const [racaEmExibicao, setRacaEmExibicao] = useState(null)
   const [classeEmExibicao, setClasseEmExibicao] = useState(null)
+const [antecedenteEmExibicao, setAntecedenteEmExibicao] = useState(null)
 
   const [tooltip, setTooltip] = useState('')
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 })
@@ -226,7 +228,10 @@ export default function CriarPersonagem() {
         </div>
 
         <div className="criar-bloco">
-          <h2 className="titulo-clicavel">Antecedente</h2>
+          <h2 className="titulo-clicavel" onClick={() => setPopup("antecedentes")}>
+  Antecedente
+</h2>
+
           <select value={antecedente} onChange={e => setAntecedente(e.target.value)}>
             <option value="">Selecione um antecedente</option>
             <option>Acólito</option>
@@ -249,10 +254,19 @@ export default function CriarPersonagem() {
       {/* POPUP RAÇAS */}
       {popup === 'racas' && (
         <div className="popup-overlay" onClick={() => { setPopup(null); setRacaEmExibicao(null) }}>
-          <div className="popup-conteudo" onClick={e => e.stopPropagation()}>
+<div className="popup-conteudo" onClick={e => e.stopPropagation()}>
 
-            <button className="popup-fechar" onClick={() => { setPopup(null); setRacaEmExibicao(null) }}>×</button>
+  <div className="popup-miolo">
+    <div className="popup-scroll">
 
+
+  <div className="ornamento-canto canto-esq-topo" />
+  <div className="ornamento-canto canto-dir-topo" />
+  <div className="ornamento-canto canto-esq-baixo" />
+  <div className="ornamento-canto canto-dir-baixo" />
+
+
+          
             {!racaEmExibicao && (
               <>
                 <h2>Raças</h2>
@@ -262,6 +276,7 @@ export default function CriarPersonagem() {
                       {r.nome}
                     </div>
                   ))}
+
                 </div>
               </>
             )}
@@ -276,9 +291,28 @@ export default function CriarPersonagem() {
 
 
 
-                <button className="botao-popup-voltar" onClick={() => setRacaEmExibicao(null)}>← Voltar</button>
+                
               </>
             )}
+    </div>
+  </div>
+<div className="popup-rodape">
+  {racaEmExibicao && (
+    <button
+      className="popup-acao"
+      onClick={() => setRacaEmExibicao(null)}
+    >
+      ← Voltar
+    </button>
+  )}
+
+  <button
+    className="popup-acao"
+    onClick={() => { setPopup(null); setRacaEmExibicao(null) }}
+  >
+    Fechar
+  </button>
+</div>
 
           </div>
         </div>
@@ -287,10 +321,19 @@ export default function CriarPersonagem() {
       {/* POPUP CLASSES */}
       {popup === 'classes' && (
         <div className="popup-overlay" onClick={() => { setPopup(null); setClasseEmExibicao(null) }}>
-          <div className="popup-conteudo" onClick={e => e.stopPropagation()}>
+         <div className="popup-conteudo" onClick={e => e.stopPropagation()}>
 
-            <button className="popup-fechar" onClick={() => { setPopup(null); setClasseEmExibicao(null) }}>×</button>
+  <div className="popup-miolo">
+    <div className="popup-scroll">
 
+
+  <div className="ornamento-canto canto-esq-topo" />
+  <div className="ornamento-canto canto-dir-topo" />
+  <div className="ornamento-canto canto-esq-baixo" />
+  <div className="ornamento-canto canto-dir-baixo" />
+
+
+          
            {!classeEmExibicao && (
   <>
     <h2>Classes</h2>
@@ -304,6 +347,9 @@ export default function CriarPersonagem() {
           {c.nome}
         </div>
       ))}
+
+
+
     </div>
   </>
 )}
@@ -312,18 +358,88 @@ export default function CriarPersonagem() {
   <>
     <ClassLayout classe={classeEmExibicao} />
 
+   
+  </>
+)}
+    </div>
+  </div>
+<div className="popup-rodape">
+  {classeEmExibicao && (
     <button
-      className="botao-popup-voltar"
+      className="popup-acao"
       onClick={() => setClasseEmExibicao(null)}
     >
       ← Voltar
     </button>
-  </>
-)}
+  )}
+
+  <button
+    className="popup-acao"
+    onClick={() => { setPopup(null); setClasseEmExibicao(null) }}
+  >
+    Fechar
+  </button>
+</div>
+
 
           </div>
         </div>
-      )}
+     
+     
+     )}
+{/* POPUP ANTECEDENTES */}
+{popup === "antecedentes" && (
+  <div className="popup-overlay" onClick={() => { setPopup(null); setAntecedenteEmExibicao(null) }}>
+    <div className="popup-conteudo" onClick={e => e.stopPropagation()}>
+
+      <div className="popup-miolo">
+        <div className="popup-scroll">
+
+          <div className="ornamento-canto canto-esq-topo" />
+          <div className="ornamento-canto canto-dir-topo" />
+          <div className="ornamento-canto canto-esq-baixo" />
+          <div className="ornamento-canto canto-dir-baixo" />
+
+          {!antecedenteEmExibicao && (
+            <>
+              <h2>Antecedentes</h2>
+
+              <div className="lista-racas">
+                {[
+                  "Acólito", "Artesão da Guilda", "Charlatão", "Criminoso", "Herói do Povo",
+                  "Nobre", "Sábio", "Soldado", "Eremita", "Forasteiro", "Marinheiro"
+                ].map(a => (
+                  <div
+                    key={a}
+                    className="item-raca"
+                    onClick={() => setAntecedenteEmExibicao(a)}
+                  >
+                    {a}
+                  </div>
+                ))}
+              </div>
+
+             
+            </>
+          )}
+
+          {antecedenteEmExibicao && (
+            <AntecedenteLayout nome={antecedenteEmExibicao} />
+          )}
+
+        </div>
+      </div>
+ <div className="popup-rodape">
+                <button
+                  className="popup-acao"
+                  onClick={() => { setPopup(null); setAntecedenteEmExibicao(null) }}
+                >
+                  Fechar
+                </button>
+              </div>
+    </div>
+  </div>
+)}
 
       {tooltip && (
         <div

@@ -76,7 +76,7 @@ Anões em outras terras são tipicamente artesãos, geralmente ferreiros, armeir
     },
   
   {
-  titulo: "Nomes Anões",
+  titulo: "NOMES ANÕES",
   texto: (
     <>
       <p>

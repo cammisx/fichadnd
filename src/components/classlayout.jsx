@@ -19,13 +19,14 @@ export default function ClassLayout({ classe }) {
     setTimeout(() => {
       setAba(nova)
       setFade(true)
-    }, 160)
+    }, 420)
   }
 
   return (
     <div className="grimorio-raca">
 
-      <h2>{classe.nome}</h2>
+    <h1 className="titulo-raca-grimorio">{classe.nome}</h1>
+
 
       <div className="abas-raca">
         <div className={`aba-item ${aba === "visao" ? "ativa" : ""}`} onClick={() => trocarAba("visao")}>Visão Geral</div>
@@ -86,22 +87,26 @@ export default function ClassLayout({ classe }) {
    
 
         {/* HABILIDADES */}
-        {aba === "habilidades" && (
-          <div className="secao-raca">
-            {habilidades.map((h, i) => (
-              <div key={i} className="bloco-texto">
-                {i > 0 && (
-                  <div className="separador-grimorio">
-                    <img src="https://i.imgur.com/XKUwqV2.png" alt="" className="separador-img" />
-                  </div>
-                )}
-                <div>
-                  <strong>{h.nome}</strong> — {h.descricao}
-                </div>
-              </div>
-            ))}
+       {aba === "habilidades" && (
+  <div className="secao-raca">
+    {habilidades.map((h, i) => (
+      <div key={i} className="bloco-texto">
+        {i > 0 && (
+          <div className="separador-grimorio">
+            <img src="https://i.imgur.com/XKUwqV2.png" alt="" className="separador-img" />
           </div>
         )}
+
+        <h4 className="subtitulo-grimorio">{h.nome}</h4>
+
+        <div className="paragrafo-grimorio">
+          {h.descricao}
+        </div>
+      </div>
+    ))}
+  </div>
+)}
+
 
    {/* SUBCLASSES */}
 {aba === "subclasses" && (
