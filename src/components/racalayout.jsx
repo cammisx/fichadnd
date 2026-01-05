@@ -60,19 +60,10 @@ export default function RacaLayout({ raca }) {
                     <h4 className="subtitulo-grimorio">{bloco.titulo}</h4>
                   </>
                 )}
-                <div
-  
-  className="paragrafo-grimorio"
-  dangerouslySetInnerHTML={{
-    __html: bloco.texto
-      // quebra normal
-      .replace(/\n/g, "<br><br>")
-      // quebra antes de cada novo bloco em negrito
-      .replace(/\s*\*\*/g, "<br><br>**")
-      // negrito markdown → HTML
-      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-  }}
-/>
+<div className="paragrafo-grimorio">
+  {bloco.texto}
+</div>
+
 
               </div>
             ))}

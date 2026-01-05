@@ -1,7 +1,7 @@
-const draconato = {
-  id: "draconato",
-  nome: "Draconato",
-  tituloCriacao: "Criando um Draconato",
+const gnomo = {
+  id: "gnomo",
+  nome: "Gnomo",
+  tituloCriacao: "Criando um Gnomo",
 
   visaoGeral: {
     quote: `"O sangue do dragão arde em meu peito."`,
@@ -30,4 +30,4 @@ const draconato = {
   }
 }
 
-export default draconato
+export default gnomo

@@ -1,8 +1,6 @@
+import ClassLayout from "../../components/classlayout.jsx"
+import mago from "../../data/classes-data/mago.jsx"
+
 export default function Mago() {
-  return (
-    <div style={{ padding: "2rem", color: "#fff" }}>
-      <h1>Mago</h1>
-      <p>Página de classe em construção.</p>
-    </div>
-  );
+  return <ClassLayout classe={mago} />
 }

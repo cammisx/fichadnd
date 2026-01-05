@@ -1,7 +1,9 @@
-import { racas } from "../../data/racas/racas"
+import { racas } from "../../data/racas-data/racas"
 import RacaLayout from "../../components/racalayout"
 
-export default function Anao() {
-  const raca = racas.find(r => r.id === "anao").ref
+export default function Anao({ raca }) {
+  if (!raca) return null
+
   return <RacaLayout raca={raca} />
 }
+

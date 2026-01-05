@@ -16,16 +16,42 @@ tituloCriacao: "Criando um Anão",
         titulo: "BAIXOS E ROBUSTOS",
         texto: `Audazes e resistentes, os anões são conhecidos como hábeis guerreiros, mineradores e trabalhadores em pedra e metal. Embora tenham menos de 1,50 metro de altura, os anões são tão largos e compactos que podem pesar tanto quanto um humano 60 centímetros mais alto. Sua coragem e resistência compete facilmente com qualquer povo mais alto. A pele dos anões varia do marrom escuro a um matiz mais pálido, tingido de vermelho, mas os tons mais comuns são o castanho claro ou bronzeado, como certos tons terrosos. O cabelo é longo, mas de estilo simples, geralmente negro, cinzento ou castanho, embora anões mais pálidos frequentemente possuam cabelos ruivos. Anões machos valorizam altamente suas barbas e preparam-nas com cuidado.`
       },
-      {
+    {
   titulo: "DIFÍCEIS DE CONFIAR",
-  texto: `Anões convivem razoavelmente bem com a maioria das outras raças. "A diferença entre um conhecido e um amigo é cerca de cem anos", é um ditado anão que pode ser uma hipérbole, mas certamente demonstra o quanto é difícil ganhar a confiança de um anão para o membro de uma raça de vida curta, como os humanos.
-**Elfos.** "Não é sensato depender dos elfos. É difícil prever o que um elfo vai fazer a seguir. Quando o martelo encontra a cabeça do orc, eles podem tanto começar a cantar ou sacar uma espada, ninguém sabe. Eles são volúveis e fúteis. Duas coisas a serem ditas sobre os elfos: eles não têm muitos ferreiros, mas os que têm fazem muito bem o trabalho. E quando orcs ou goblins avançam pelas montanhas, é bom ter um elfo ao seu lado. Talvez não tão bom quanto um anão, mas sem dúvida eles odeiam os orcs tanto quanto nós."
-**Halflings.** "Claro, eles são gente boa. Mas me mostre um herói halfling. Um império, um exército triunfante. Até mesmo um tesouro conquistado pelas mãos de um halfling. Nada. Como você pode levá-los a sério?"
-**Humanos.** "Você começa a conhecer uma humana, e então ela já está em seu leito de morte. Se você tiver sorte, ela terá descendentes — talvez uma filha ou neta — que têm mãos e coração tão bons quanto o dela. Só assim você pode fazer um amigo humano. E assisti-los partir! Se eles colocam o coração em algo, eles vão atrás, seja o tesouro de um dragão ou o trono de um império. Essa dedicação é digna de admiração, mesmo que ela os ponha em apuros com muita frequência."`
-}
+  texto: (
+    <>
+      <p>
+        Anões convivem razoavelmente bem com a maioria das outras raças. 
+        “A diferença entre um conhecido e um amigo é cerca de cem anos”, é um ditado anão 
+        que pode ser uma hipérbole, mas certamente demonstra o quanto é difícil ganhar a 
+        confiança de um anão para o membro de uma raça de vida curta, como os humanos.
+      </p>
 
-    ]
-  },
+      <p>
+        <strong>Elfos.</strong> “Não é sensato depender dos elfos. É difícil prever o que um elfo vai fazer a seguir. 
+        Quando o martelo encontra a cabeça do orc, eles podem tanto começar a cantar ou sacar uma espada, ninguém sabe. 
+        Eles são volúveis e fúteis. Duas coisas a serem ditas sobre os elfos: eles não têm muitos ferreiros, mas os que 
+        têm fazem muito bem o trabalho. E quando orcs ou goblins avançam pelas montanhas, é bom ter um elfo ao seu lado. 
+        Talvez não tão bom quanto um anão, mas sem dúvida eles odeiam os orcs tanto quanto nós.”
+      </p>
+
+      <p>
+        <strong>Halflings.</strong> “Claro, eles são gente boa. Mas me mostre um herói halfling. Um império, um exército 
+        triunfante. Até mesmo um tesouro conquistado pelas mãos de um halfling. Nada. Como você pode levá-los a sério?”
+      </p>
+
+      <p>
+        <strong>Humanos.</strong> “Você começa a conhecer uma humana, e então ela já está em seu leito de morte. 
+        Se você tiver sorte, ela terá descendentes — talvez uma filha ou neta — que têm mãos e coração tão bons quanto o dela. 
+        Só assim você pode fazer um amigo humano. E assisti-los partir! Se eles colocam o coração em algo, eles vão atrás, 
+        seja o tesouro de um dragão ou o trono de um império. Essa dedicação é digna de admiração, mesmo que ela os ponha 
+        em apuros com muita frequência.”
+      </p>
+    </>
+  )
+}
+    ]}
+,
 
   culturaSociedade: [
     {
@@ -48,17 +74,40 @@ Anões em outras terras são tipicamente artesãos, geralmente ferreiros, armeir
       titulo: "DEUSES, OURO E CLÃ",
       texto: `Anões que seguem uma vida de aventuras podem ser motivados pelo desejo por tesouros — para uso próprio, para um propósito específico ou mesmo a partir do desejo altruísta de ajudar os outros. Outros anões são guiados pelo comando ou pela inspiração de uma divindade, um chamado direto ou simplesmente o desejo de trazer glória a um dos deuses anões. O clã e os ancestrais de um anão também são motivações importantes. Um anão pode buscar restaurar a honra perdida de um clã, vingar uma antiga ofensa sofrida pelo clã ou reconquistar um lugar no clã depois de ter sido exilado. Ou um anão pode buscar por um machado empunhado por um poderoso ancestral, perdido no campo de batalha há séculos.`
     },
-    {
-  titulo: "NOMES ANÕES",
-  texto: `O nome de um anão é concedido pelo ancião de um clã, de acordo com a tradição. Todos os nomes próprios anões têm sido utilizados e reutilizados através de gerações. O nome de um anão pertence ao clã, não ao indivíduo. Um anão que ousar indevidamente ou trouxer vergonha ao clã tem seu nome retirado e está proibido por lei de usar qualquer outro nome anão em seu lugar.
+  
+  {
+  titulo: "Nomes Anões",
+  texto: (
+    <>
+      <p>
+        O nome de um anão é concedido pelo ancião de um clã, de acordo com a tradição.
+        Todos os nomes próprios anões têm sido utilizados e reutilizados através de gerações.
+        O nome de um anão pertence ao clã, não ao indivíduo.
+        Um anão que usar indevidamente ou trouxer vergonha ao clã tem seu nome retirado e está
+        proibido por lei de usar qualquer outro nome anão em seu lugar.
+      </p>
 
-**Nomes masculinos:** Adrik, Alberich, Baern, Barendd, Brottor, Bruenor, Dain, Darrak, Delg, Eberk, Einkil, Fargrim, Flint, Gardain, Harbek, Kildrak, Morgran, Orsik, Oskar, Rangrim, Rurik, Taklinn, Thoradin, Thorin, Tordek, Traubon, Travok, Ulfgar, Veit, Vondal.
+      <p><strong>Nomes masculinos:</strong><br/>
+        Adrik, Alberich, Baern, Barendd, Brotter, Bruenor, Dain, Darrak, Delg, Eberk,
+        Einki, Fargim, Flint, Gardain, Harbek, Kildrak, Morgran, Orsik, Oskar, Rangrim,
+        Rurik, Taklinn, Thoradin, Thorin, Tordek, Traubon, Travok, Ulgaar, Veit, Vondal.
+      </p>
 
-**Nomes femininos:** Amber, Artin, Audhild, Bardryn, Dagnal, Diesa, Eldeth, Falkrunn, Gunnloda, Gurdis, Helja, Hlin, Kathra, Kristryd, Ilde, Liftrasa, Mardred, Riswynn, Sannl, Torbera, Torgga, Vistra.
+      <p><strong>Nomes femininos:</strong><br/>
+        Amber, Artin, Audhild, Bardryn, Dagnal, Diesa, Eldeth, Falkrunn, Gunnloda, Gurdis,
+        Helja, Hlin, Kathra, Kristryd, Liftrasa, Mardred, Riswynn, Sannl, Torbera, Torgga,
+        Vistra.
+      </p>
 
-**Nomes de Clãs:** Balderk, Battlehammer, Brawnanvil, Dankil, Fireforge, Frostbeard, Gorunn, Holderhek, Ironfist, Loderr, Lutgehr, Rumnaheim, Strakeln, Torunn, Ungart.`
-
+      <p><strong>Nomes de clãs:</strong><br/>
+        Balderk, Battlehammer, Brawnanvil, Dankil, Fireforge, Frostbeard, Gorunn,
+        Holderhek, Ironfist, Loderr, Lutgehr, Rumnaheim, Strakeln, Torunn, Ungart.
+      </p>
+    </>
+  )
 }
+
+
 
   ],
 

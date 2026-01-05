@@ -1,4 +1,4 @@
-import { racas } from "../../data/racas/racas"
+import { racas } from "../../data/racas-data/racas"
 import RacaLayout from "../../components/racalayout"
 
 export default function Humano() {

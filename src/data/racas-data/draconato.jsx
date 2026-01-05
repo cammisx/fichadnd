@@ -1,7 +1,7 @@
-const humano = {
-  id: "humano",
-  nome: "Humano",
-  tituloCriacao: "Criando um Humano",
+const draconato = {
+  id: "draconato",
+  nome: "Draconato",
+  tituloCriacao: "Criando um Draconato",
 
   visaoGeral: {
     quote: `"Somos breves, mas intensos."`,
@@ -30,4 +30,4 @@ const humano = {
   }
 }
 
-export default humano
+export default draconato
