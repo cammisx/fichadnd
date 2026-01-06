@@ -4,6 +4,7 @@ import { racas } from '../../data/racas-data/racas.js'
 import { classes } from '../../data/classes-data/classes.js'
 import ClassLayout from '../../components/classlayout.jsx'
 import AntecedenteLayout from "../../components/antecedentelayout.jsx"
+import SeparadorGrimorio from "../../components/SeparadorGrimorio.jsx"
 
 
 import Anao from '../racas/anao.jsx'
@@ -75,6 +76,22 @@ const paginasClasses = {
 }
 
 
+function rolarAtributos() {
+  const resultados = []
+
+  for (let i = 0; i < 6; i++) {
+    const dados = Array.from({ length: 4 }, () =>
+      Math.floor(Math.random() * 6) + 1
+    )
+
+    dados.sort((a, b) => a - b)
+    const soma = dados[1] + dados[2] + dados[3]
+
+    resultados.push({ dados, soma })
+  }
+
+  setResultadosAtributos(resultados)
+}
 
 export default function CriarPersonagem() {
 
@@ -89,11 +106,13 @@ export default function CriarPersonagem() {
 
   const [classe, setClasse] = useState('')
   const [antecedente, setAntecedente] = useState('')
+const [resultadosAtributos, setResultadosAtributos] = useState([])
 
   const [popup, setPopup] = useState(null)
   const [racaEmExibicao, setRacaEmExibicao] = useState(null)
   const [classeEmExibicao, setClasseEmExibicao] = useState(null)
 const [antecedenteEmExibicao, setAntecedenteEmExibicao] = useState(null)
+const [mostrarRolador, setMostrarRolador] = useState(false)
 
   const [tooltip, setTooltip] = useState('')
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 })
@@ -114,19 +133,18 @@ const [antecedenteEmExibicao, setAntecedenteEmExibicao] = useState(null)
 
   return (
     <div className="criar">
+      <div className="criar-coluna-esquerda">
       <div className="criar-frame">
-
-        <h1>Criar Personagem</h1>
 
         <div className="criar-bloco">
           <h2>Identidade</h2>
 
-          <label>Nome</label>
+          <label>Nome do Personagem</label>
           <input value={nome} onChange={e => setNome(e.target.value)} />
 
           <label>Idade</label>
           <input type="number" value={idade} onChange={e => setIdade(e.target.value)} />
-
+<SeparadorGrimorio />
           <h2>Alinhamento</h2>
 
           <div className="alinhamento-bloco">
@@ -181,7 +199,7 @@ const [antecedenteEmExibicao, setAntecedenteEmExibicao] = useState(null)
             </div>
           </div>
         </div>
-
+<SeparadorGrimorio />
         <div className="criar-bloco">
           <h2 className="titulo-clicavel" onClick={() => setPopup('racas')}>Raça</h2>
 
@@ -200,7 +218,7 @@ const [antecedenteEmExibicao, setAntecedenteEmExibicao] = useState(null)
           </select>
 
           {racaSelecionada?.criacao?.subracas?.length > 0 && (
-            <>
+            <><SeparadorGrimorio />
               <h2>Sub-raça</h2>
               <select
                 value={subracaSelecionada}
@@ -214,7 +232,7 @@ const [antecedenteEmExibicao, setAntecedenteEmExibicao] = useState(null)
             </>
           )}
         </div>
-
+<SeparadorGrimorio />
         <div className="criar-bloco">
           <h2 className="titulo-clicavel" onClick={() => setPopup('classes')}>Classe</h2>
 
@@ -226,7 +244,7 @@ const [antecedenteEmExibicao, setAntecedenteEmExibicao] = useState(null)
 </select>
 
         </div>
-
+<SeparadorGrimorio />
         <div className="criar-bloco">
           <h2 className="titulo-clicavel" onClick={() => setPopup("antecedentes")}>
   Antecedente
@@ -247,9 +265,11 @@ const [antecedenteEmExibicao, setAntecedenteEmExibicao] = useState(null)
             <option>Marinheiro</option>
           </select>
         </div>
-
-        <button className="criar-botao">Próximo</button>
       </div>
+      </div>
+   <div className="criar-direita">
+      {/* aqui depois a gente coloca preview, arte, ficha, etc */}
+    </div>
 
       {/* POPUP RAÇAS */}
       {popup === 'racas' && (
@@ -449,6 +469,43 @@ const [antecedenteEmExibicao, setAntecedenteEmExibicao] = useState(null)
           {tooltip}
         </div>
       )}
+ <div className="criar-coluna-centro">
+    {/* Preview do personagem (vazio por enquanto) */}
+  </div>
+
+  <div className="criar-coluna-direita">
+    {/* Rolador entra aqui */}
+  </div>
+
+   <div className="botao-rolador" onClick={() => setMostrarRolador(true)}>
+  <img src="https://i.imgur.com/mk3Hmev.png" alt="Rolador" />
+</div>
+{mostrarRolador && (
+  <div className="rolador-popover">
+    <div className="rolador-seta"></div>
+
+    <div className="rolador-modal">
+      <h2>Rolador Arcano</h2>
+
+      <div className="rolador-conteudo">
+  <button className="rolar-botao" onClick={rolarAtributos}>
+    Rolar Atributos
+  </button>
+  {resultadosAtributos.length > 0 && (
+  <div className="resultado-atributos">
+    {resultadosAtributos.map((r, i) => (
+      <div key={i} className="linha-resultado">
+        {r.dados.join(" , ")} → <strong>{r.soma}</strong>
+      </div>
+    ))}
+  </div>
+)}
+
+</div>
+
+    </div>
+  </div>
+)}
 
     </div>
   )
