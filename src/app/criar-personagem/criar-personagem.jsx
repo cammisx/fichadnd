@@ -76,22 +76,6 @@ const paginasClasses = {
 }
 
 
-function rolarAtributos() {
-  const resultados = []
-
-  for (let i = 0; i < 6; i++) {
-    const dados = Array.from({ length: 4 }, () =>
-      Math.floor(Math.random() * 6) + 1
-    )
-
-    dados.sort((a, b) => a - b)
-    const soma = dados[1] + dados[2] + dados[3]
-
-    resultados.push({ dados, soma })
-  }
-
-  setResultadosAtributos(resultados)
-}
 
 export default function CriarPersonagem() {
 
@@ -116,6 +100,42 @@ const [mostrarRolador, setMostrarRolador] = useState(false)
 
   const [tooltip, setTooltip] = useState('')
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 })
+const [atributos, setAtributos] = useState({
+  for: null,
+  des: null,
+  con: null,
+  int: null,
+  sab: null,
+  car: null
+})
+
+const [atributoSelecionado, setAtributoSelecionado] = useState(null)
+const [valorSelecionado, setValorSelecionado] = useState(null)
+const [rolandoAtributos, setRolandoAtributos] = useState(false);
+
+
+function calcularMod(valor) {
+  if (!valor) return 0
+  return Math.floor((valor - 10) / 2)
+}
+
+
+function rolarAtributos() {
+  const novosResultados = []
+
+  for (let i = 0; i < 6; i++) {
+    const dados = Array.from({ length: 4 }, () =>
+      Math.floor(Math.random() * 6) + 1
+    )
+
+    dados.sort((a, b) => a - b)
+    const soma = dados[1] + dados[2] + dados[3]
+
+    novosResultados.push({ dados, soma })
+  }
+
+  setResultadosAtributos(novosResultados)
+}
 
   useEffect(() => {
     if (!popup) return
@@ -130,6 +150,37 @@ const [mostrarRolador, setMostrarRolador] = useState(false)
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .replace(/[^a-z]/g, '')
+
+   function rolarAtributos() {
+  setRolandoAtributos(true);  // Marca que o botão está em rolagem
+
+  const novosResultados = [];
+
+  // Som de rolagem - trecho específico
+  const audio = new Audio('/sounds/rolagem.m4a');  // Caminho do som
+  audio.currentTime = 9.170;  // Começa no segundo 9.170
+  audio.play();
+
+  // Para o áudio após 1 segundo (até o segundo 10.259)
+  setTimeout(() => {
+    audio.pause();  // Para o áudio no segundo 10.259
+  }, 1090);  // 1090ms = 1 segundo a partir de 9.170s (10.259 - 9.170)
+
+  for (let i = 0; i < 6; i++) {
+    const dados = Array.from({ length: 4 }, () => Math.floor(Math.random() * 6) + 1);
+    dados.sort((a, b) => a - b);
+    const soma = dados[1] + dados[2] + dados[3];
+    novosResultados.push({ dados, soma });
+  }
+
+  // Atualizar os resultados depois da animação
+  setTimeout(() => {
+    setResultadosAtributos(novosResultados);
+    setRolandoAtributos(false); // Reabilita o botão e exibe "Rolar Novamente"
+  }, 1000);  // O tempo de espera para a rolagem pode ser ajustado
+}
+
+
 
   return (
     <div className="criar">
@@ -477,31 +528,59 @@ const [mostrarRolador, setMostrarRolador] = useState(false)
     {/* Rolador entra aqui */}
   </div>
 
-   <div className="botao-rolador" onClick={() => setMostrarRolador(true)}>
-  <img src="https://i.imgur.com/mk3Hmev.png" alt="Rolador" />
+<div
+  className="botao-rolador"
+  onClick={() => setMostrarRolador(v => !v)}
+>
+
+  <img src="https://i.imgur.com/RTWOzJV.png" alt="Rolador" />
 </div>
 {mostrarRolador && (
   <div className="rolador-popover">
     <div className="rolador-seta"></div>
 
     <div className="rolador-modal">
-      <h2>Rolador Arcano</h2>
+  
+  <div className="rolador-conteudo">
 
-      <div className="rolador-conteudo">
-  <button className="rolar-botao" onClick={rolarAtributos}>
-    Rolar Atributos
-  </button>
-  {resultadosAtributos.length > 0 && (
-  <div className="resultado-atributos">
-    {resultadosAtributos.map((r, i) => (
-      <div key={i} className="linha-resultado">
-        {r.dados.join(" , ")} → <strong>{r.soma}</strong>
-      </div>
-    ))}
-  </div>
-)}
+  {!rolandoAtributos && (
+    <button
+      className="rolar-botao"
+      onClick={rolarAtributos}
+    >
+      {resultadosAtributos.length > 0 ? "Rolar novamente" : "Rolar Atributos"}
+    </button>
+  )}
+
+  {rolandoAtributos && (
+    <div className="animacao-dados">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <img
+          key={i}
+          src="https://i.imgur.com/RTWOzJV.png"
+          alt="Dado"
+          className="dado-animado"
+        />
+      ))}
+    </div>
+  )}
+
+  {(!rolandoAtributos && resultadosAtributos.length > 0) && (
+    <div className="resultado-atributos">
+      {resultadosAtributos.map((r, i) => (
+        <div key={i} className="linha-resultado">
+          🎲 {r.dados.map((d, j) => (
+            <span key={j} style={{ margin: "0 3px" }}>{d}</span>
+          ))}
+          <span style={{ margin: "0 6px" }}>➜</span>
+          <strong style={{ color: "#ffd37a", fontSize: "16px" }}>{r.soma}</strong>
+        </div>
+      ))}
+    </div>
+  )}
 
 </div>
+
 
     </div>
   </div>
